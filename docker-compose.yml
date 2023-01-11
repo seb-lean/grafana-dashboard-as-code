@@ -33,7 +33,7 @@ services:
     environment:
       - GRAFANA_URL=http://admin:admin@grafana:3000
     working_dir: /src/dashboards
-    entrypoint: sh -c "../wait-for.sh grafana:3000 -- grr apply ./datasource.yaml && grr apply ./main.jsonnet && grr watch jsonnet/ ./main.jsonnet"
+    entrypoint: sh -c "../wait-for.sh grafana:3000 -- grr apply ./datasource.yaml && grr apply ./main.jsonnet && grr watch . ./main.jsonnet"
   node-app:
     build:
       context: node-app
@@ -43,6 +43,6 @@ services:
       - SERVER_PORT=8080
     volumes:
       - ./node-app:/code
-    command: npm run dev
+      - /code/node_modules
     expose:
       - 8080

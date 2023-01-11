@@ -1,0 +1,9 @@
+apiVersion: grizzly.grafana.com/v1alpha1
+kind: Datasource
+metadata:
+  name: prometheus
+spec:
+  access: proxy
+  name: prometheus
+  type: prometheus
+  url: http://prometheus:9090

@@ -20,7 +20,7 @@ git clone git@github.com:seb-lean/grafana-dashboard-as-code.git
 Navigate into the project directory:
 
 ```bash
-cd node-prometheus-grafana
+cd grafana-dashboard-as-code
 ```
 
 Start the Docker containers:

@@ -5,24 +5,28 @@ The repository contains a sample Node.js app that integrates the [Prometheus cli
 ## Prerequisites
 
 Make sure that you have Docker and Docker Compose installed:
+
 - [Docker Engine](https://docs.docker.com/engine)
 - [Docker Compose](https://docs.docker.com/compose)
 
 ## Getting started
 
 Clone the repository:
+
 ```bash
-git clone https://github.com/arpendu11/node-prometheus-grafana.git
+git clone git@github.com:seb-lean/grafana-dashboard-as-code.git
 ```
 
 Navigate into the project directory:
+
 ```bash
 cd node-prometheus-grafana
 ```
 
- Start the Docker containers:
+Start the Docker containers:
+
 ```bash
-docker-compose up -d
+docker compose up --build
 ```
 
 ## Test containers
@@ -30,13 +34,9 @@ docker-compose up -d
 - Prometheus should be accessible via [http://localhost:9090](http://localhost:9090)
 - Grafana should be accessible via [http://localhost:3000](http://localhost:3000)
 - Example Node.js server metrics for monitoring should be accessible via [http://localhost:8080/metrics](http://localhost:8080/metrics)
-- Example Node.js slow URL should be accessible via [http://localhost:8080/slow](http://localhost:8080/slow)
 
-## Open monitoring dashboards
+## Grafonnet
 
-Open in your web browser the monitoring dashboards:
+This demo uses [Jsonnet](https://jsonnet.org/) and [Grafonnet](https://grafana.github.io/grafonnet-lib/) to programmatically build the JSON used to describe dashboard and panels.
 
-- [NodeJS Application Dashboard](http://localhost:3000/d/PTSqcpJWk/nodejs-application-dashboard)
-- [High Level Application metrics](http://localhost:3000/d/OnjTYJg7k/high-level-application-metrics)
-- [Node Service Level Metrics Dashboard](http://localhost:3000/d/WBxkVyRnz/node-service-level-metrics-dashboard)
-- [NodeJS Request Flow Dashboard](http://localhost:3000/d/2Er5E1R7k/nodejs-request-flow-dashboard)
+As per the Grafonnet docs, we also use [Grizzly](https://grafana.github.io/grizzly/what-is-grizzly/) to watch for changes and deploy them. Once Docker is running you can even make changes to `main.jsonnet` and they'll automatically be reflected on Grafana. Just refresh!

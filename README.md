@@ -29,9 +29,12 @@ Start the Docker containers:
 docker compose up --build
 ```
 
+**You should now be able to see the generated Grafana dashboards at**
+[http://localhost:3000/d/empty_dashboard/my-cool-dashboard](http://localhost:3000/d/empty_dashboard/my-cool-dashboard)
+
 ## Test containers
 
-- Prometheus should be accessible via [http://localhost:9090](http://localhost:9090)
+- Prometheus should be accessible via [http://localhost:9090](http://localhost:9090). eg query [http_request_duration_ms_count](<http://localhost:9090/new/graph?g0.expr=sum(rate(http_request_duration_ms_count%5B1m%5D))%20by%20(service%2C%20route%2C%20method%2C%20code)%20%20*%2060&g0.tab=0&g0.stacked=0&g0.range_input=30m>)
 - Grafana should be accessible via [http://localhost:3000](http://localhost:3000)
 - Example Node.js server metrics for monitoring should be accessible via [http://localhost:8080/metrics](http://localhost:8080/metrics)
 

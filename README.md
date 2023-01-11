@@ -43,3 +43,7 @@ docker compose up --build
 This demo uses [Jsonnet](https://jsonnet.org/) and [Grafonnet](https://grafana.github.io/grafonnet-lib/) to programmatically build the JSON used to describe dashboard and panels.
 
 As per the Grafonnet docs, we also use [Grizzly](https://grafana.github.io/grizzly/what-is-grizzly/) to watch for changes and deploy them. Once Docker is running you can even make changes to `main.jsonnet` and they'll automatically be reflected on Grafana. Just refresh!
+
+## Demo video
+
+https://www.youtube.com/watch?v=xEi-UKYCIYI

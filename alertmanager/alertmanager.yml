@@ -1,0 +1,16 @@
+global:
+  opsgenie_api_key: "079b4782-f697-49db-8ae4-345908877eef"
+
+route:
+  receiver: opsgenie
+
+receivers:
+  - name: opsgenie
+    opsgenie_configs:
+      - send_resolved: true
+        api_key: "079b4782-f697-49db-8ae4-345908877eef"
+        description: '{{ template "opsgenie.lean.description" . }}'
+        message: '{{ template "opsgenie.lean.message" . }}'
+
+templates:
+  - /config/*.tmpl

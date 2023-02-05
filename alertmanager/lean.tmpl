@@ -1,0 +1,25 @@
+{{ define "__title" -}}
+[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if (index .Alerts 0).Labels.alertname }}{{ (index .Alerts 0).Labels.alertname }}{{- end }}
+{{- end }}
+
+{{ define "__description" -}}
+{{ if eq .Status "firing" }}
+{{ range .Alerts }}
+{{ range .Labels.SortedPairs }} *{{ .Name | title }}:* `{{ .Value }}`{{- "\n" -}}{{ end }}
+
+*Summary:* {{ .Annotations.summary }}
+
+*Description:*
+{{ .Annotations.description }}
+Source: {{ .GeneratorURL }}
+{{ end }}
+{{ end }}
+{{- end }}
+
+{{ define "opsgenie.lean.message" }}
+    {{ template "__title" . }}
+{{- end }}
+
+{{ define "opsgenie.lean.description" }}
+    {{ template "__description" . }}
+{{- end }}

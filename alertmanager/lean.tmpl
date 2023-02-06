@@ -5,13 +5,17 @@
 {{ define "__description" -}}
 {{ if eq .Status "firing" }}
 {{ range .Alerts }}
+{{- "\n" -}}
 {{ range .Labels.SortedPairs }} *{{ .Name | title }}:* `{{ .Value }}`{{- "\n" -}}{{ end }}
-
-*Summary:* {{ .Annotations.summary }}
+*Summary:*
+{{ .Annotations.summary }}
 
 *Description:*
 {{ .Annotations.description }}
-Source: {{ .GeneratorURL }}
+
+*Links:* <{{ .GeneratorURL }} | Query>, <{{ .Annotations.runbook_url }} | Runbook>
+{{- "\n" -}}
+{{- "\n" -}}
 {{ end }}
 {{ end }}
 {{- end }}

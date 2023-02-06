@@ -9,18 +9,19 @@ groups:
         annotations:
           summary: "Alert with low severity."
 
-      - alert: PaymentApiErrorRate210
-        expr: sum(checkouts_total) > 210
+      - alert: SomeNewAlert9
+        expr: sum(checkouts_total) > 9
         labels:
-          severity: info
+          severity: critical
           team: imt
+          squad: dai
         annotations:
           summary: Data API error rate is elevated sebtest
           description: >-
             Overall failure rate for the Data API due to Lean errors has
-            increased to {{ $value | humanizePercentage }} for the last 5
+            increased to {{ $value }} for the last 5
             minutes sebtest
-          runbook_url: ""
+          runbook_url: "https://duckie.co.uk/"
 
       - alert: InstanceDownCritical
         expr: up{job="services"} < 1

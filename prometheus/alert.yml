@@ -9,10 +9,24 @@ groups:
         annotations:
           summary: "Alert with low severity."
 
-      - alert: SomeNewAlert9
-        expr: sum(checkouts_total) > 9
+      - alert: SomeNewAlerttt13
+        expr: sum(checkouts_total) > 13
         labels:
-          severity: critical
+          severity: info
+          team: imt
+          squad: ":poop:"
+        annotations:
+          summary: Some API error rate is elevated sebtest
+          message: >-
+            messagemessagemessage Overall failure rate for the Some API due to Lean errors has
+            increased to {{ $value }} for the last 5
+            minutes info
+          runbook_url: "https://runbook_url.com"
+
+      - alert: ANewAlert33
+        expr: sum(checkouts_total) > 33
+        labels:
+          severity: info
           team: imt
           squad: dai
         annotations:
@@ -21,7 +35,7 @@ groups:
             Overall failure rate for the Data API due to Lean errors has
             increased to {{ $value }} for the last 5
             minutes sebtest
-          runbook_url: "https://duckie.co.uk/"
+          runbook_url: "https://runbook_url.com"
 
       - alert: InstanceDownCritical
         expr: up{job="services"} < 1

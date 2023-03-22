@@ -9,8 +9,30 @@ receivers:
     opsgenie_configs:
       - send_resolved: true
         api_key: "079b4782-f697-49db-8ae4-345908877eef"
-        description: '{{ template "opsgenie.lean.description" . }}'
-        message: '{{ template "opsgenie.lean.message" . }}'
+        description: |
+          {{ if eq .Status "firing" }}
+          {{ range .Alerts }}
+          {{- "\n" -}}
+          *{{ .Annotations.summary }}*
+          {{- "\n" -}}
+          {{- "\n" -}}
+          {{ range .Labels.SortedPairs }} *{{ .Name | title }}:* `{{ .Value }}`{{- "\n" -}}{{ end }}
+
+          {{ if .Annotations.description -}}
+          {{ .Annotations.description }}
+          {{- else if .Annotations.message -}}
+          {{ .Annotations.message }}
+          {{- end }}
+
+          <{{ .GeneratorURL }} | Query> 
+          {{- if .Annotations.runbook_url }}, <{{ .Annotations.runbook_url }} | Runbook>{{- end }}
+          {{- if .Annotations.dashboard_url }}, <{{ .Annotations.dashboard_url }} | Dashboard>{{- end }}
+          {{- "\n" -}}
+          {{- "\n" -}}
+          --
+          {{ end }}
+          {{ end }}
+        message: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if (index .Alerts 0).Labels.alertname }}{{ (index .Alerts 0).Labels.alertname }}{{- end }}'
 
 templates:
   - /config/*.tmpl
